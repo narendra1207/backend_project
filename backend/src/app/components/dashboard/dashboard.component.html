@@ -1,0 +1,139 @@
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-xl-3 col-md-6 xl-50" *ngFor="let data of objCountData">
+      <div class="card o-hidden widget-cards">
+        <div [class]="data.bgColorClass">
+          <div class="media static-top-widget row">
+            <div class="icons-widgets col-4">
+              <div class="align-self-center text-center">
+                <app-feather-icon [icon]="data.icon" [class]="data.fontColorClass"></app-feather-icon>
+              </div>
+            </div>
+            <div class="media-body col-8">
+              <span class="m-0">{{data.title}}</span>
+              <h3 class="mb-0">
+                ₹ <span class="counter" [CountTo]="data.count" [from]="count.from" [duration]="count.duration"></span><small>This Year</small>
+              </h3>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- <div class="col-xl-3 col-md-6 xl-50">
+      <div class="card o-hidden widget-cards">
+        <div class="bg-warning card-body">
+          <div class="media static-top-widget row">
+            <div class="icons-widgets col-4">
+              <div class="align-self-center text-center">
+                <app-feather-icon icon="navigation" class="font-warning"></app-feather-icon>
+              </div>
+            </div>
+            <div class="media-body col-8">
+              <span class="m-0">Oreders</span>
+              <h3 class="mb-0">
+                ₹ <span class="counter" [CountTo]="count.Orders" [from]="count.from" [duration]="count.duration"></span><small>This Year</small>
+              </h3>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-xl-3 col-md-6 xl-50">
+      <div class="card o-hidden widget-cards">
+        <div class="bg-secondary card-body">
+          <div class="media static-top-widget row">
+            <div class="icons-widgets col-4">
+              <div class="align-self-center text-center">
+                <app-feather-icon icon="box" class="font-secondary"></app-feather-icon>
+
+              </div>
+            </div>
+            <div class="media-body col-8">
+              <span class="m-0">Shipping Amount</span>
+              <h3 class="mb-0">
+                ₹ <span class="counter" [CountTo]="count.ShippingAmount" [from]="count.from" [duration]="count.duration"></span><small>This Year</small>
+              </h3>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>  <div class="col-xl-3 col-md-6 xl-50">
+      <div class="card o-hidden widget-cards">
+        <div class="bg-primary card-body">
+          <div class="media static-top-widget row">
+            <div class="icons-widgets col-4">
+              <div class="align-self-center text-center">
+                <app-feather-icon icon="message-square" class="font-primary"></app-feather-icon>
+
+              </div>
+            </div>
+            <div class="media-body col-8">
+              <span class="m-0">Cash On Delivery</span>
+              <h3 class="mb-0">
+                ₹ <span class="counter" [CountTo]="count.CashOnDelivery" [from]="count.from" [duration]="count.duration"></span><small>This Year</small>
+              </h3>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>  <div class="col-xl-3 col-md-6 xl-50">
+      <div class="card o-hidden widget-cards">
+        <div class="bg-danger card-body">
+          <div class="media static-top-widget row">
+            <div class="icons-widgets col-4">
+              <div class="align-self-center text-center">
+                <app-feather-icon icon="users" class="font-danger"></app-feather-icon>
+
+              </div>
+            </div>
+           
+            <div class="media-body col-8">
+              <span class="m-0">Cancelled</span>
+              <h3 class="mb-0">
+                ₹ <span class="counter" [CountTo]="count.Cancelled" [from]="count.from" [duration]="count.duration"></span><small>This Year</small>
+              </h3>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div> -->
+
+    <div class="col-xl-12 xl-100">
+      <div class="card">
+        <div class="card-header">
+          <h5>Latest Orders </h5>
+        </div>
+        <div class="card-body">
+          <div class="user-status table-responsive latest-order-table">
+            <div
+              id="batchDelete"
+              class="category-table custom-datatable transcation-datatable"
+            >
+              <div class="table-responsive">
+                <ng2-smart-table [settings]="settings" [source]="orders"></ng2-smart-table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-sm-12">
+      <div class="card">
+        <div class="card-header">
+          <h5>Order status</h5>
+        </div>
+        <div class="card-body sell-graph">
+          <canvas baseChart 
+          id="myGraph" 
+          [datasets]="lineChartData" 
+          [labels]="lineChartLabels" 
+          [options]="lineChartOptions"
+           [legend]="lineChartLegend"
+           [type]="'line'" >
+          </canvas>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

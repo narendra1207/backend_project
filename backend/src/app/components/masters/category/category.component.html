@@ -1,0 +1,123 @@
+<div class="container-fluid">
+    <div class="card">
+        <div class="card-header">
+            <h5>Category Master</h5>
+        </div>
+        <div class="card-body tab2-card">
+            <ul ngbNav #nav="ngbNav" class="nav-tabs" activeId="viewtab" (navChange)="tabChange($event)">
+                <li ngbNavItem="addtab">
+                    <a ngbNavLink>Add</a>
+                    <ng-template ngbNavContent>
+                        <!--Add Start-->
+                        <form [formGroup]="addForm" (ngSubmit)="Submit()">
+                            <div class="form-group row">
+                                <label for="validationCustom0" class="col-xl-3 col-md-4"><span>*</span>Name</label>
+                                <input class="form-control col-xl-8 col-md-7" type="text" formControlName="name">
+                                <div class="col-xl-3 col-md-4"></div>
+                                <div class="col-xl-8 col-md-7" *ngIf="f['name'].touched && f['name'].invalid">
+                                    <span style="color:#dc3545 !important"
+                                        *ngIf="f['name'].hasError('required')">{{validationMessage.name.required}}</span>
+                                    <div class="text-danger" *ngIf="formErrors">{{formErrors.name}}
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label for="validationCustom0" class="col-xl-3 col-md-4"><span>*</span>Title</label>
+                                <input class="form-control col-xl-8 col-md-7" type="text" formControlName="title">
+                                <div class="col-xl-3 col-md-4"></div>
+                                <div class="col-xl-8 col-md-7" *ngIf="f['title'].touched && f['title'].invalid">
+                                    <span style="color:#dc3545 !important"
+                                        *ngIf="f['title'].hasError('required')">{{validationMessage.title.required}}</span>
+                                    <div class="text-danger" *ngIf="formErrors">{{formErrors.title}}
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label for="validationCustom0" class="col-xl-3 col-md-4"><span>*</span>Save Value</label>
+                                <input class="form-control col-xl-8 col-md-7" type="text" formControlName="isSave">
+                                <div class="col-xl-3 col-md-4"></div>
+                                <div class="col-xl-8 col-md-7" *ngIf="f['isSave'].touched && f['isSave'].invalid">
+                                    <span style="color:#dc3545 !important"
+                                        *ngIf="f['isSave'].hasError('required')">{{validationMessage.isSave.required}}</span>
+                                    <div class="text-danger" *ngIf="formErrors">{{formErrors.isSave}}
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label for="validationCustom0" class="col-xl-3 col-md-4"><span>*</span>Link</label>
+                                <input class="form-control col-xl-8 col-md-7" type="text" formControlName="link">
+                                <div class="col-xl-3 col-md-4"></div>
+                                <div class="col-xl-8 col-md-7" *ngIf="f['link'].touched && f['link'].invalid">
+                                    <span style="color:#dc3545 !important"
+                                        *ngIf="f['link'].hasError('required')">{{validationMessage.link.required}}</span>
+                                    <div class="text-danger" *ngIf="formErrors">{{formErrors.link}}
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label for="validationCustom0" class="col-xl-3 col-md-4"><span>*</span>Image(Logo)</label>
+                                <input class="form-control col-xl-8 col-md-7" type="file" #file (change)="upload(file.files)"
+                                accept="image/*">
+                                <div class="col-xl-3 col-md-4"></div>
+                                <img alt="brandlogo" [src]="addedImagePath" width="100px" height="100px" />
+                            </div>
+                            <div class="pull-right px-2">
+                                <button type="submit" class="btn btn-primary"
+                                    [disabled]="addForm.invalid">{{buttonText}}</button>
+                            </div>
+                            <div class="pull-right">
+                                <button type="button" class="btn btn-danger" (click)="cancelForm()">Cancel</button>
+                            </div>
+                        </form>
+                        <!--Add End-->
+                    </ng-template>
+                </li>
+                <li ngbNavItem="viewtab">
+                    <a ngbNavLink>View</a>
+                    <ng-template ngbNavContent>
+                        <!--View Start-->
+                        <div class="container-fluid">
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <div class="card">
+                                        <div class="card-body">
+                                            <div class="custom-datatable">
+                                                <ngx-datatable class="bootstrap" [rows]="objRows" [columnMode]="'force'"
+                                                    [headerHeight]="50" [footerHeight]="50" [rowHeight]="'auto'"
+                                                    [limit]="5" (sort)="onSort($event)" (page)="onPage($event)">
+                                                    
+                                                    <ngx-datatable-column name="Name"></ngx-datatable-column>
+                                                    <ngx-datatable-column name="Title"></ngx-datatable-column>
+                                                    <ngx-datatable-column name="Save Value" prop="isSave"></ngx-datatable-column>
+                                                    <ngx-datatable-column name="Link"></ngx-datatable-column>
+                                                    <ngx-datatable-column name="Image">
+                                                        <ng-template let-row="row" ngx-datatable-cell-template>
+                                                          <img alt="brandlogo" [src]="row.imagePath" width="100px" height="100px" />
+                                                        </ng-template>
+                                                    </ngx-datatable-column>
+
+                                                    <ngx-datatable-column name="Created Date" prop="createdOn">
+                                                    </ngx-datatable-column>
+                                                    <ngx-datatable-column name="Action">
+                                                        <ng-template let-row="row" ngx-datatable-cell-template>
+                                                            <button type="button" (click)="Edit(row.id)"><i
+                                                                    class="fa fa-edit"></i></button>
+                                                            <button type="button" (click)="Delete(row.id)"><i
+                                                                    class="fa fa-trash"></i></button>
+                                                        </ng-template>
+                                                    </ngx-datatable-column>
+                                                </ngx-datatable>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!--View End-->
+                    </ng-template>
+                </li>
+            </ul>
+            <div [ngbNavOutlet]="nav"></div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,32 @@
+<div class="container-fluid">
+    <div class="card">
+        <div class="card-header">
+            <h5>View User</h5>
+        </div>
+        <div class="card-body">
+            <div class="btn-popup pull-right">
+                <a class="btn btn-secondary" routerLink="/users/add-user">Add User</a>
+            </div>
+            <div id="batchDelete" class="category-table custom-datatable transcation-datatable userimage">
+                <div class="table-responsive">
+                    <ngx-datatable class="bootstrap" [rows]="objRows" [columnMode]="'force'" [headerHeight]="50"
+                        [footerHeight]="50" [rowHeight]="'auto'" [limit]="5" (sort)="onSort($event)"
+                        (page)="onPage($event)">
+                        <ngx-datatable-column name="First Name"></ngx-datatable-column>
+                        <ngx-datatable-column name="Last Name"></ngx-datatable-column>
+                        <ngx-datatable-column name="Email"></ngx-datatable-column>
+                        <ngx-datatable-column name="User Type"></ngx-datatable-column>
+                        <ngx-datatable-column name="Created Date" prop="createdOn">
+                        </ngx-datatable-column>
+                        <ngx-datatable-column name="Action">
+                            <ng-template let-row="row" ngx-datatable-cell-template>
+                                <button type="button" (click)="Edit(row.id)"><i class="fa fa-edit"></i></button>
+                                <button type="button" (click)="Delete(row.id)"><i class="fa fa-trash"></i></button>
+                            </ng-template>
+                        </ngx-datatable-column>
+                    </ngx-datatable>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

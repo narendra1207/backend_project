@@ -1,0 +1,15 @@
+
+<div class="page-wrapper">
+    <app-header></app-header>
+  <div class="page-body-wrapper">
+    <div class="page-sidebar" [class.open]="_collapseService.openNav">
+        <app-sidebar></app-sidebar>
+        </div>
+      <div class="page-body">
+        <app-breadcrumb></app-breadcrumb>
+        <router-outlet></router-outlet>
+      </div>
+      <app-footer></app-footer>
+    </div>
+  </div>
+
